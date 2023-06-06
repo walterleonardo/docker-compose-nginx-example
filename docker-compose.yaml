@@ -1,0 +1,16 @@
+version: '3'
+services:
+  web:
+    image: nginx:latest
+    ports:
+    - "80:80"
+    volumes:
+    - ./src:/usr/share/nginx/html
+    links:
+    - php
+    healthcheck:
+      test: ["CMD-SHELL", "curl -s http://localhost -o /dev/null || exit 1"]
+      timeout: 10s
+  php:
+    image: php:7-fpm
+
